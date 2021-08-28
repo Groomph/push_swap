@@ -6,12 +6,11 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 01:21:50 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/08/07 18:25:57 by romain           ###   ########.fr       */
+/*   Updated: 2021/08/28 08:14:50 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "buffer.h"
 #include <unistd.h>
 
 static void	apply_swap(t_list **numbers)
@@ -24,62 +23,48 @@ static void	apply_swap(t_list **numbers)
 	(*numbers)->next = tmp;
 }
 
-void	swap_a(t_swap *swap)
+void	swap_a(t_stacks *stacks)
 {
-	if (swap->size > 1)
+	if (stacks->size_a > 1)
 	{
-		apply_swap(&(swap->numbers));
-		if (swap->do_display)
-			write_str_buffer("sa\n", 3);
-		else
-			swap->count_test++;
+		apply_swap(&(stacks->a));
+		add_command(stacks, SA);
 	}
 	else
 		write(1, "sa: not supposed to happen\n", 27);
 }
 
-void	swap_b(t_swap *swap)
+void	swap_b(t_stacks *stacks)
 {
-	if (swap->size2 > 1)
+	if (stacks->size_b > 1)
 	{
-		apply_swap(&(swap->numbers2));
-		if (swap->do_display)
-			write_str_buffer("sb\n", 3);
-		else
-			swap->count_test++;
+		apply_swap(&(stacks->b));
+		add_command(stacks, SB);
 	}
 	else
 		write(1, "sb: not supposed to happen\n", 27);
 }
 
-void	swap_ss(t_swap *swap)
+void	swap_ss(t_stacks *stacks)
 {
 	int	check;
 
 	check = 0;
-	if (swap->size > 1)
+	if (stacks->size_a > 1 && ++check)
+		apply_swap(&(stacks->a));
+	if (stacks->size_b > 1)
 	{
-		apply_swap(&(swap->numbers));
-		check++;
+		apply_swap(&(stacks->b));
+		check += 2;
 	}
-	if (swap->size2 > 1)
+	if (check != 3)
 	{
-		apply_swap(&(swap->numbers2));
-		check++;
-	}
-	if (check != 2)
 		write(1, "ss: not supposed to happen\n", 27);
-	if (swap->do_display)
-		write_str_buffer("ss\n", 3);
+		if (check == 1)
+			add_command(stacks, SA);
+		else if (check == 2)
+			add_command(stacks, SB);
+	}
 	else
-		swap->count_test++;
+		add_command(stacks, SS);
 }
-/*
-void	swap_current(t_swap *swap, t_list **current)
-{
-	if (current == &(swap->numbers))
-		swap_a(swap);
-	else
-		swap_b(swap);
-}
-*/

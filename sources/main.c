@@ -6,60 +6,43 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 16:17:50 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/08/05 18:37:08 by romain           ###   ########.fr       */
+/*   Updated: 2021/08/28 03:56:10 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "buffer.h"
 
-BOOL    checkifsort(t_swap *swap)
+#include <stdio.h>
+
+void	exit_program(t_stacks *stacks, BOOL error)
 {
-	t_list  *tmp_list;
-	int             tmp_int;
-	int             tmp_int2;
-
-	tmp_list = swap->numbers;
-	if (swap->size2 > 0)
-	{
-		return (FALSE);
-	//	write(1, "Error: wrong sort\n", 18);
-	//	exit_program(swap, FALSE);
-	}
-	while (tmp_list->next)
-	{
-		tmp_int = *((int *)(tmp_list->object));
-		tmp_int2 = *((int *)(tmp_list->next->object));
-		if (tmp_int > tmp_int2)
-		{
-			return (FALSE);
-//			write(1, "Error: not sorted\n", 18);
-//			exit_program(swap, FALSE);
-		}
-		tmp_list = tmp_list->next;
-	}
-	return (TRUE);
-}
-
-void	exit_program(t_swap *swap, BOOL error)
-{
-	ft_lstclear(&(swap->numbers), &free);
+	ft_lstclear(&(stacks->a), &free);
+	ft_lstclear(&(stacks->b), &free);
+	lst2_clear(&(stacks->cmd), &free);
 	if (error)
-		write(2, "Error\n", 6);
+	{
+		if (error == 2)
+			write(2, "Malloc error\n", 13);
+		else
+			write(2, "Error\n", 6);
+	}
 	exit(1);
 }
 
 int	main(int ac, char **av)
 {
-	t_swap	swap;
+	t_stacks	stacks;
 
-	init_buffer();
-	init_zero(&swap, sizeof(swap));
-	if (!build_list(&swap, ac - 1, &(av[1]))
-			|| !check_doubles(&swap, swap.numbers))
-		exit_program(&swap, TRUE);
-	select_algo(&swap);
-	checkifsort(&swap);
-	exit_program(&swap, FALSE);
+	init_zero(&stacks, sizeof(stacks));
+	build_list(&stacks, ac - 1, &(av[1]));
+	check_doubles(&stacks);
+	if (!checkifsort(&stacks))
+	{
+		select_algo(&stacks);
+		printf("size a: %i\n", stacks.size_a);
+		printf("size b: %i\n", stacks.size_b);
+		printf("total size : %i\n", stacks.total_size);
+	}
+	exit_program(&stacks, FALSE);
 	return (1);
 }

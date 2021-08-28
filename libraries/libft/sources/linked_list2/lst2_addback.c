@@ -1,25 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   lst2_addback.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/15 14:56:08 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/08/24 17:35:22 by rsanchez         ###   ########.fr       */
+/*   Created: 2020/12/15 14:55:40 by rsanchez          #+#    #+#             */
+/*   Updated: 2021/08/27 18:11:29 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+static void	lst2_addback2(t_list2 **alst, t_list2 *new)
 {
-	if (!lst)
-		return ;
-	if (del && *lst)
+	if (!*alst)
 	{
-		ft_lstclear(&((*lst)->next), del);
-		del(*lst);
-		*lst = NULL;
+		*alst = new;
+		new->prev = NULL;
 	}
+	else if ((*alst)->next)
+		lst2_addback2(&(*alst)->next, new);
+	else
+	{
+		(*alst)->next = new;
+		new->prev = *alst;
+	}
+}
+
+void	lst2_addback(t_list2 **alst, t_list2 *new, t_list2 *last)
+{
+	new->next = NULL;
+	if (last)
+	{
+		last->next = new;
+		new->prev = last;
+	}
+	else
+		lst2_addback2(alst, new);
 }

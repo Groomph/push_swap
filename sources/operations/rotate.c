@@ -6,12 +6,11 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 01:22:24 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/08/05 13:52:20 by romain           ###   ########.fr       */
+/*   Updated: 2021/08/28 08:15:19 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "buffer.h"
 #include <unistd.h>
 
 static void	apply_rotate(t_list **numbers)
@@ -24,53 +23,48 @@ static void	apply_rotate(t_list **numbers)
 	tmp->next = NULL;
 }
 
-void	rotate_a(t_swap *swap)
+void	rotate_a(t_stacks *stacks)
 {
-	if (swap->size > 1)
+	if (stacks->size_a > 1)
 	{
-		apply_rotate(&(swap->numbers));
-		if (swap->do_display)
-			write_str_buffer("ra\n", 3);
-		else
-			swap->count_test++;
+		apply_rotate(&(stacks->a));
+		add_command(stacks, RA);
 	}
 	else
 		write(1, "ra: not supposed to happen\n", 27);
 }
 
-void	rotate_b(t_swap *swap)
+void	rotate_b(t_stacks *stacks)
 {
-	if (swap->size2 > 1)
+	if (stacks->size_b > 1)
 	{
-		apply_rotate(&(swap->numbers2));
-		if (swap->do_display)
-			write_str_buffer("rb\n", 3);
-		else
-			swap->count_test++;
+		apply_rotate(&(stacks->b));
+		add_command(stacks, RB);
 	}
 	else
 		write(1, "rb: not supposed to happen\n", 27);
 }
 
-void	rotate_rr(t_swap *swap)
+void	rotate_rr(t_stacks *stacks)
 {
 	int	check;
 
 	check = 0;
-	if (swap->size > 1)
+	if (stacks->size_a > 1 && ++check)
+		apply_rotate(&(stacks->a));
+	if (stacks->size_b > 1)
 	{
-		apply_rotate(&(swap->numbers));
-		check++;
+		apply_rotate(&(stacks->b));
+		check += 2;
 	}
-	if (swap->size2 > 1)
+	if (check != 3)
 	{
-		apply_rotate(&(swap->numbers2));
-		check++;
-	}
-	if (check != 2)
 		write(1, "rr: not supposed to happen\n", 27);
-	if (swap->do_display)
-		write_str_buffer("rr\n", 3);
+		if (check == 1)
+			add_command(stacks, RA);
+		else if (check == 2)
+			add_command(stacks, RB);
+	}
 	else
-		swap->count_test++;
+		add_command(stacks, RR);
 }

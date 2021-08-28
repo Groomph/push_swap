@@ -6,58 +6,36 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 15:00:17 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/08/03 00:44:08 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/08/26 00:54:05 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static BOOL	check_doubles2(t_list *list, t_list *list2, int tmp_int, int *count)
+void	check_doubles(t_stacks *stacks)
 {
-	int	check;
-	int	is_passed;
+	t_list	*list;
+	t_list	*list2;
 
-	check = 0;
-	is_passed = FALSE;
-	list->index = 0;
-	while (list2)
-	{
-		if (list != list2 && tmp_int == *((int *)(list2->object)))
-			return (FALSE);
-		if (tmp_int > *((int *)(list2->object)))
-		{
-			if (is_passed)
-				check++;
-			list->index++;
-		}
-		if (list == list2)
-			is_passed = TRUE;
-		list2 = list2->next;
-	}
-	if (!check)
-		(*count)++;
-	return (TRUE);
-}
-
-BOOL	check_doubles(t_swap *swap, t_list *list)
-{
-	int		tmp_int;
-	int		count;
-
-	count = 0;
+	list = stacks->a;
 	while (list)
 	{
-		tmp_int = *((int *)(list->object));
-		if (!check_doubles2(list, swap->numbers, tmp_int, &count))
-			return (FALSE);
+		list->index = 0;
+		list->group = 0;
+		list2 = stacks->a;
+		while (list2)
+		{
+			if (list != list2 && list->nb == list2->nb)
+				exit_program(stacks, TRUE);
+			if (list->nb > list2->nb)
+				list->index++;
+			list2 = list2->next;
+		}
 		list = list->next;
 	}
-	if (count == swap->size)
-		exit_program(swap, FALSE);
-	return (TRUE);
 }
 
-static int	new_atoi(t_swap *swap, char *str, int *i)
+static int	new_atoi(t_stacks *stacks, char *str, int *i)
 {
 	unsigned int	nb;
 	int				neg;
@@ -70,46 +48,40 @@ static int	new_atoi(t_swap *swap, char *str, int *i)
 		(*i)++;
 	while (str[(*i)] >= '0' && str[(*i)] <= '9')
 	{
-		if (nb >= 2000000000
+		if (nb >= 1000000000
 			|| (nb >= 214748364
 				&& (str[(*i)] > '8' || (neg == 1 && str[(*i)] > '7'))))
-			exit_program(swap, TRUE);
+			exit_program(stacks, TRUE);
 		nb *= 10;
 		nb += str[(*i)] - '0';
 		(*i)++;
 	}
 	if (str[*i] && !is_whitespace(str[*i]))
-		exit_program(swap, TRUE);
+		exit_program(stacks, TRUE);
 	while (is_whitespace(str[*i]))
 		(*i)++;
 	return (nb * neg);
 }
 
-static BOOL	add_link(t_swap *swap, char *str, int *i)
+static void	add_link(t_stacks *stacks, char *str, int *i)
 {
-	int		*tmp_object;
 	t_list	*tmp_list;
 
 	if ((str[*i] == '+' || str[*i] == '-')
 		&& !(str[(*i) + 1] >= '0' && str[*(i) + 1] <= '9'))
-		return (FALSE);
-	tmp_object = malloc(sizeof(int));
-	if (!tmp_object)
-		return (FALSE);
-	*tmp_object = new_atoi(swap, str, i);
-	tmp_list = ft_lstnew(tmp_object);
-	if (!tmp_list)
 	{
-		free(tmp_object);
-		return (FALSE);
+		exit_program(stacks, TRUE);
 	}
-	ft_lstadd_back(&(swap->numbers), tmp_list);
-	swap->size++;
-	swap->total_size++;
-	return (TRUE);
+	tmp_list = malloc(sizeof(t_list));
+	if (!tmp_list)
+		exit_program(stacks, 2);
+	tmp_list->nb = new_atoi(stacks, str, i);
+	ft_lstadd_back(&(stacks->a), tmp_list);
+	stacks->size_a++;
+	stacks->total_size++;
 }
 
-BOOL	build_list(t_swap *swap, int ac, char **av)
+void	build_list(t_stacks *stacks, int ac, char **av)
 {
 	int	i;
 	int	j;
@@ -119,7 +91,7 @@ BOOL	build_list(t_swap *swap, int ac, char **av)
 	{
 		j = 0;
 		if (!av[i][j])
-			return (FALSE);
+			exit_program(stacks, TRUE);
 		while (av[i][j])
 		{
 			while (is_whitespace(av[i][j]))
@@ -127,13 +99,11 @@ BOOL	build_list(t_swap *swap, int ac, char **av)
 			if (av[i][j] == '+' || av[i][j] == '-'
 				|| (av[i][j] >= '0' && av[i][j] <= '9'))
 			{
-				if (!add_link(swap, av[i], &j))
-					return (FALSE);
+				add_link(stacks, av[i], &j);
 			}
 			else
-				return (FALSE);
+				exit_program(stacks, TRUE);
 		}
 		i++;
 	}
-	return (TRUE);
 }

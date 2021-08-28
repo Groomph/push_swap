@@ -6,126 +6,82 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 12:44:09 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/08/07 18:58:22 by romain           ###   ########.fr       */
+/*   Updated: 2021/08/28 08:15:49 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "buffer.h"
+#include <unistd.h>
 
-static void (*g_algo_functions[6])(t_swap *swap) =
+static void (*g_algo_functions[2])(t_stacks *stacks) =
 {
-	&algo_1,
-	&algo_15,
-	&algo_2,
-	&algo_25,
-	&algo_3,
-//	&algo_35,
+	&quicksort_rec,
 	NULL
 };
 
-static void	sort_three(t_swap *swap)
+static char	*str[2] =
 {
-	int	tmp;
-	int	tmp2;
-	int	tmp3;
-
-	tmp = swap->numbers->index;
-	tmp2 = swap->numbers->next->index;
-	tmp3 = swap->numbers->next->next->index;
-	if (tmp < tmp2 && tmp < tmp3 && tmp2 > tmp3)
-	{
-		rev_rotate_a(swap);
-		swap_a(swap);
-	}
-	else if (tmp > tmp2 && tmp < tmp3)
-		swap_a(swap);
-	else if (tmp < tmp2 && tmp > tmp3)
-		rev_rotate_a(swap);
-	else if (tmp > tmp2 && tmp2 > tmp3)
-	{
-		swap_a(swap);
-		rev_rotate_a(swap);
-	}
-	else if (tmp > tmp2 && tmp2 < tmp3)
-		rotate_a(swap);
-}
-
-static void	sort_five(t_swap *swap)
-{
-	int	index;
-	int	dir;
-
-	while (swap->size > 3)
-	{
-		index = swap->size - 4;
-		lf_index_dir(swap->numbers, swap->size, index, &dir);
-		move_rotate(swap, dir, &rotate_a, &rev_rotate_a);
-		push_b(swap);
-	}
-	sort_three(swap);
-	while (swap->size2 > 0)
-		push_a(swap);
-}
+	"1: algo pivot/quicksort: ",
+	NULL
+};
 
 #include <stdio.h>
 
-static int	test_algo(t_swap *swap)
+void	init_copy(t_stacks *stacks, t_stacks *copy)
 {
-	int	i;
-	int	results[2];
-	t_list	*stock_a;
-
-	i = 0;
-	results[0] = 2000000000;
-	stock_a = swap->numbers;
-	while (g_algo_functions[i] != NULL)
-	{
-		swap->numbers = duplicate_list(swap, stock_a);
-		g_algo_functions[i](swap);
-		if (checkifsort(swap) && swap->count_test < results[0])
-		{
-			results[0] = swap->count_test;
-			results[1] = i;
-		}
-		printf("Algo test %i: %i\n", i, swap->count_test);
-		swap->count_test = 0;
-		ft_lstclear(&(swap->numbers), &free);
-		ft_lstclear(&(swap->numbers2), &free);
-		i++;
-	}
-	swap->numbers = stock_a;
-	return (results[1]);
+	ft_lstclear(&(copy->a), &free);
+	ft_lstclear(&(copy->b), &free);
+	copy->a = lst_duplicate(stacks->a);
+	if (!copy->a && stacks->a)
+		exit_program(stacks, 2);
+	copy->b = lst_duplicate(stacks->b);
+	if (!copy->b && stacks->b)
+		exit_program(stacks, 2);
+	copy->size_a = stacks->size_a;
+	copy->size_b = stacks->size_b;
+	copy->total_size = stacks->total_size;
+	copy->count = 0;
+	copy->cmd = NULL;
 }
 
-void	select_algo(t_swap *swap)
+static void	select_algo2(t_stacks *stacks)//, void (*f[])(t_stacks *))
 {
 	int	i;
+	int	results;
+	t_stacks	copy;
 
-	init_buffer();
-	if (swap->size == 2)
+	i = -1;
+	results = 2000000000;
+	init_zero(&copy, sizeof(copy));
+	while (g_algo_functions[++i] != NULL)
 	{
-		swap->do_display = TRUE;
-		swap_a(swap);
+		init_copy(stacks, &copy);
+		g_algo_functions[i](&copy);
+		if (copy.count < results)
+		{
+			results = copy.count;
+			if (stacks->cmd)
+				lst2_clear(&(stacks->cmd), &free);
+			stacks->cmd = copy.cmd;
+		}
+		else
+			lst2_clear(&(copy.cmd), &free);
+		printf("\n%s %i\n", str[i], copy.count);
 	}
-	else if (swap->size <= 5)
-	{
-		swap->do_display = TRUE;
-		sort_five(swap);
-	}
+	ft_lstclear(&(copy.a), &free);
+	ft_lstclear(&(copy.b), &free);
+}
+
+void	select_algo(t_stacks *stacks)
+{
+	if (stacks->size_a == 2)
+		swap_a(stacks);
+	else if (stacks->size_a <= 5)
+		sort_five(stacks);
 	else
-	{
-		i = test_algo(swap);
-		write_str_buffer("Algo selectionne: ", 18); 
-		write_int_buffer(i);
-		write_char_buffer('\n', 1);
-		swap->do_display = TRUE;
-		g_algo_functions[i](swap);
-		write_str_buffer("Algo selectionne: ", 18); 
-		write_int_buffer(i);
-		write_char_buffer('\n', 1);
-	}
-	print_buffer(1);
-	if (!checkifsort(swap))
-		write(1, "Error: not sorted\n", 18);
+		select_algo2(stacks);
+//	if (checkifsort(stacks))
+//		display_commands(stacks->cmd);
+//	else
+//		write(1, "Error: not sorted\n", 18);
 }
