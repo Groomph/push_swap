@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 18:29:55 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/08 00:07:39 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/09/10 20:34:15 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	set_group(t_list2 *stack, int group)
 {
-        while (stack)
-        {
-                stack->group = group;
-                stack = stack->next;
-        }
+	while (stack)
+	{
+		stack->group = group;
+		stack = stack->next;
+	}
 }
 
 int	attrib_group(t_list2 *stack, int size_stack, int size_group)

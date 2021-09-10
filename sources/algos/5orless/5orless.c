@@ -6,14 +6,14 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 20:44:57 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/09 14:28:49 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/09/10 20:39:32 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <unistd.h>
 
-static void     sort_topthree(t_stacks *stacks)
+static void	sort_topthree(t_stacks *stacks)
 {
 	int	tmp[3];
 
@@ -36,7 +36,7 @@ static void     sort_topthree(t_stacks *stacks)
 		write(1, "sort_top_a: not supposed to happen\n", 35);
 }
 
-static void     sort_three(t_stacks *stacks)
+static void	sort_three(t_stacks *stacks)
 {
 	int	tmp[3];
 
@@ -77,7 +77,7 @@ static void	sort_five2(t_stacks *stacks, int size, int i, BOOL top)
 		push_a(stacks);
 }
 
-void    sort_five(t_stacks *stacks, int size, int group, BOOL top)
+void	sort_five(t_stacks *stacks, int size, int group, BOOL top)
 {
 	int	i;
 	int	index;
@@ -86,8 +86,10 @@ void    sort_five(t_stacks *stacks, int size, int group, BOOL top)
 	i = 0;
 	while (i < size - 3)
 	{
-		index = lf_smallest_index_ingroup(stacks->a, group, &dir, stacks->size_a);
-		if ((size == 5 && dir == 1 && stacks->a->index == index + 1)				|| (size == 4 && dir == 1))
+		index = lf_smallest_index_ingroup(stacks->a, group,
+				&dir, stacks->size_a);
+		if ((size == 5 && dir == 1 && stacks->a->index == index + 1)
+			|| (size == 4 && dir == 1))
 			swap_a(stacks);
 		else
 			move_rotate(stacks, dir, &rotate_a, &rev_rotate_a);

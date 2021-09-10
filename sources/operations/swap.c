@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 01:21:50 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/02 14:14:10 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/09/10 20:28:52 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void	swap_ss(t_stacks *stacks)
 	}
 	if (check != 3)
 	{
-		write(1, "ss: not supposed to happen\n", 27);
 		if (check == 1)
 			add_command(stacks, SA);
 		else if (check == 2)
@@ -88,7 +87,7 @@ void	which_swap(t_stacks *stacks, char c)
 	if (c == 'a')
 	{
 		if (stacks->size_b > 1
-				&& stacks->b->index < stacks->b->next->index)
+			&& stacks->b->index < stacks->b->next->index)
 			swap_ss(stacks);
 		else
 			swap_a(stacks);
@@ -96,7 +95,7 @@ void	which_swap(t_stacks *stacks, char c)
 	else
 	{
 		if (stacks->size_a > 1
-				&& stacks->a->index > stacks->a->next->index)
+			&& stacks->a->index > stacks->a->next->index)
 			swap_ss(stacks);
 		else
 			swap_b(stacks);

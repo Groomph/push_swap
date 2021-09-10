@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 15:00:17 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/08/30 17:16:09 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/09/10 20:15:13 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ static int	new_atoi(t_stacks *stacks, char *str, int *i)
 		(*i)++;
 	return (nb * neg);
 }
-
-#include <stdio.h>
 
 static void	add_link(t_stacks *stacks, char *str, int *i)
 {

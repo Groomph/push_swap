@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 14:30:16 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/07/25 09:52:22 by romain           ###   ########.fr       */
+/*   Updated: 2021/09/10 21:07:34 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 # define BUFFER_SIZE 100
 
-typedef	struct	s_buffer
+typedef struct s_buffer
 {
 	int			i;
 	int			totalsize;

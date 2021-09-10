@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 16:17:50 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/10 18:05:51 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/09/10 18:30:02 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,10 @@ void	exit_program(t_stacks *stacks, BOOL error)
 	lst2_clear(&(stacks->a), &free);
 	lst2_clear(&(stacks->b), &free);
 	lst2_clear(&(stacks->cmd), &free);
-	if (error)
-	{
-		if (error == 2)
-			write(2, "Malloc error\n", 13);
-		else
-			write(2, "Error\n", 6);
-	}
+	if (error == TRUE)
+		write(2, "Error\n", 6);
 	exit(1);
 }
-
-#include <stdio.h>
 
 int	main(int ac, char **av)
 {

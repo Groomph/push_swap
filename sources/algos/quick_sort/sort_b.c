@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 09:51:19 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/09 14:25:05 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/09/10 20:57:53 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void	split_group_b(t_list2 *stack, int group)
 {
-	int	min;
-	int	max;
-	int	mid;
-	t_list2 *stock;
+	int		min;
+	int		max;
+	int		mid;
+	t_list2	*stock;
 
 	stock = stack;
 	min = 999999999;

@@ -6,7 +6,7 @@
 /*   By: romain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 07:56:16 by romain            #+#    #+#             */
-/*   Updated: 2021/07/25 10:04:29 by romain           ###   ########.fr       */
+/*   Updated: 2021/09/10 21:15:03 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	itoa_base(long long int nb, char *dest, char *base, int sizebase)
 {
-	unsigned long long int tmp;
+	unsigned long long int	tmp;
 
 	if (nb < 0)
 	{

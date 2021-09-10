@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 01:22:24 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/02 13:41:18 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/09/10 20:28:05 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	rev_rotate_rrr2(t_stacks *stacks, int check)
 
 void	rev_rotate_rrr(t_stacks *stacks)
 {
-	int	check;
+	int		check;
 	t_list2	*tmp;
 
 	check = 0;

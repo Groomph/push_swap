@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 14:32:47 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/07/25 09:53:04 by romain           ###   ########.fr       */
+/*   Updated: 2021/09/10 21:18:10 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_buffer	g_buf;
 
-int		print_buffer(int fd)
+int	print_buffer(int fd)
 {
 	write(fd, g_buf.str, g_buf.i);
 	g_buf.totalsize += g_buf.i;

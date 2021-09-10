@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 14:25:29 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/08/30 15:29:30 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/09/10 21:10:51 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ typedef struct s_list
 	int		nb;
 	int		index;
 	int		group;
-	struct s_list			*next;
-}					t_list;
+	struct s_list	*next;
+}		t_list;
 
 typedef struct s_list2
 {
-	int		nb;
-	int		index;
-	int		group;
+	int			nb;
+	int			index;
+	int			group;
 	struct s_list2	*prev;
 	struct s_list2	*next;
 }					t_list2;
@@ -45,7 +45,7 @@ int	valeur_absolue(int nb);
  ******************   BYTEWISE & MEMORY  ******************
 */
 
-void		init_zero(void *pt, size_t i);
+void	init_zero(void *pt, size_t i);
 
 /*
  *******************  IS? FONCTIONS  *******************
@@ -60,9 +60,9 @@ int	is_whitespace(char c);
  *******************  CHAR & STRING  *******************
 */
 
-char		*substr_free(char *s, size_t start, size_t len, int freestr);
-char		*strjoin_free(char *s1, char *s2, int freestr1,	int freestr2);
-size_t		string_len(const char *s);
+char	*substr_free(char *s, size_t start, size_t len, int freestr);
+char	*strjoin_free(char *s1, char *s2, int freestr1,	int freestr2);
+size_t	string_len(const char *s);
 int	shift_right_add(char *str, char c, int i);
 int	shift_left_erase(char *str, int i);
 int	str_n_comp(char *str, char *str2, int stop);
@@ -107,6 +107,6 @@ t_list2	*lst2_duplicate(t_list2 *original);
  *******************  FILE DESCRIPTOR  *******************
 */
 
-int		get_next_line(int fd, char **line);
+int	get_next_line(int fd, char **line);
 
 #endif

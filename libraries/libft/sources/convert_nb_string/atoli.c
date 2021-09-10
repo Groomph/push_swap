@@ -6,7 +6,7 @@
 /*   By: romain <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 19:00:15 by romain            #+#    #+#             */
-/*   Updated: 2021/07/26 16:17:17 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/09/10 21:17:17 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 long int	ft_atoli(const char *str)
 {
-	int				i;
+	int					i;
 	unsigned long int	nb;
-	int				neg;
+	int					neg;
 
 	i = 0;
 	nb = 0;
@@ -40,7 +40,7 @@ long int	ft_atoli(const char *str)
 long int	atoli_windex(const char *str, int *i)
 {
 	unsigned long int	nb;
-	int				neg;
+	int					neg;
 
 	nb = 0;
 	neg = 1;

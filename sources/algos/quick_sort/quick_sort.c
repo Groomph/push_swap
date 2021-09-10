@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 09:51:19 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/08 00:00:17 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/09/10 20:57:26 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void	split_group_a(t_list2 *stack, int group)
 {
-	int	min;
-	int	max;
-	int	mid;
-	t_list2 *stock;
+	int		min;
+	int		max;
+	int		mid;
+	t_list2	*stock;
 
 	stock = stack;
 	min = 999999999;
@@ -55,19 +55,18 @@ static void	split_unsorted(t_stacks *stacks, int group)
 		back_to_bot(stacks, -1, 'a');
 	back_to_bot(stacks, 0, 'b');
 	stacks->first_locked_a = lock_sorted(stacks->a, stacks->total_size,
-					stacks->first_locked_a,	stacks->last_a);
+			stacks->first_locked_a, stacks->last_a);
 	quicksort_a(stacks, group + 1);
 }
 
 void	quicksort_a(t_stacks *stacks, int group)
 {
-	int	size;
+	int		size;
 	BOOL	check;
 
-//	display_stacks(stacks);
 	size = get_size_first_group(stacks->a);
-	check = is_sorted_inc(stacks->a, stacks->total_size, 
-					stacks->first_locked_a, stacks->last_a);
+	check = is_sorted_inc(stacks->a, stacks->total_size,
+			stacks->first_locked_a, stacks->last_a);
 	if (stacks->a->group == -1)
 		quicksort_b(stacks);
 	else if (size <= 5 || check)
@@ -87,8 +86,6 @@ void	quicksort_a(t_stacks *stacks, int group)
 	else
 		split_unsorted(stacks, group);
 }
-
-#include "unistd.h"
 
 void	quicksort_rec(t_stacks *stacks)
 {
@@ -110,6 +107,4 @@ void	quicksort_rec(t_stacks *stacks)
 	if (stacks->extra == 4)
 		stacks->extra = 0;
 	quicksort_a(stacks, group);
-//	if (!checkifsort(stacks))
-//		write(1, "not sorted\n", 11);
 }

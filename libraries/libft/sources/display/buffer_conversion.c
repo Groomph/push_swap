@@ -6,14 +6,14 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 07:28:28 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/07/25 08:25:13 by romain           ###   ########.fr       */
+/*   Updated: 2021/09/10 21:19:05 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "buffer.h"
 #include "libft.h"
 
-void		write_widechar_buffer(wchar_t c)
+void	write_widechar_buffer(wchar_t c)
 {
 	if (c <= 0x7F)
 		write_char_buffer(c, 1);
@@ -37,10 +37,10 @@ void		write_widechar_buffer(wchar_t c)
 	}
 }
 
-void		write_int_buffer(int nb)
+void	write_int_buffer(int nb)
 {
 	char	str[12];
-	int	size;
+	int		size;
 
 	size = itoa_base(nb, str, "0123456789", 10);
 	write_str_buffer(str, size);

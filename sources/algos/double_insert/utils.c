@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:15:02 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/10 14:34:47 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/09/10 20:52:24 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ int	set_target(t_stacks *stacks, int size_group, int *tar, char c)
 		{
 			tar[1] = last / 2;
 			tar[0] = tar[1] - 1;
-		}    
+		}
 		else
 		{
 			tar[0] = last / 2;
 			tar[1] = tar[0] + 1;
-		}    
+		}
 		return (last);
 	}
 	else
@@ -40,4 +40,3 @@ int	set_target(t_stacks *stacks, int size_group, int *tar, char c)
 		return (tar[1]);
 	}
 }
-

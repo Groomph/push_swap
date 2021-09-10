@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 12:52:10 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/06 17:01:24 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/09/10 20:54:43 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	presort_2(t_stacks *stacks, BOOL *check)
 {
-	int     dir;
-	int     dir2;
+	int	dir;
+	int	dir2;
 
 	check[0] = lf_group_dir(stacks->a, stacks->size_a, 0, &dir);
 	check[1] = lf_group_dir(stacks->a, stacks->size_a, 1, &dir2);
@@ -36,7 +36,7 @@ static void	presort_2(t_stacks *stacks, BOOL *check)
 
 void	presort_x_a(t_stacks *stacks, int size_group, BOOL reset_group)
 {
-	BOOL    check[2];
+	BOOL	check[2];
 
 	attrib_group(stacks->a, stacks->size_a, size_group);
 	check[0] = 1;

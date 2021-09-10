@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 14:27:12 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/05 03:48:45 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/09/10 20:54:02 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ static void	find_place(int index, t_list2 *list, int size, int *move)
 	{
 		dist = find_nearest_smaller(index, list);
 		if (dist < mid)
-			move[0] = dist + 1; 
+			move[0] = dist + 1;
 		else if (dist >= mid)
 			move[1] = size - dist - 1;
 	}
 	else
 	{
 		if (dist <= mid)
-			move[0] = dist; 
+			move[0] = dist;
 		else if (dist > mid)
 			move[1] = size - dist;
 	}
@@ -60,10 +60,10 @@ static void	find2(t_stacks *stacks, int *move_ab, int *tmp_ab, int *result)
 
 static void	find_best_move(t_stacks *stacks, int *move_ab)
 {
-	int	mid;
+	int		mid;
 	t_list2	*list;
-	int	tmp_ab[4];
-	int	result[2];
+	int		tmp_ab[4];
+	int		result[2];
 
 	mid = stacks->size_b / 2;
 	list = stacks->b;

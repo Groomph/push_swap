@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 15:08:04 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/10 13:15:33 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/09/10 20:51:23 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	sort_final(t_stacks *stacks, int size, int index, int last)
 
 static void	sort_final(t_stacks *stacks, int index)
 {
-	int 	dir;
+	int	dir;
 
 	while (stacks->size_b > 0)
 	{
@@ -56,7 +56,7 @@ static void	sort_final(t_stacks *stacks, int index)
 
 static BOOL	find_best_dir(t_stacks *stacks, int *t, char c, int *dir)
 {
-	int	tmp[2];
+	int		tmp[2];
 	BOOL	check;
 	BOOL	check2;
 
@@ -70,14 +70,10 @@ static BOOL	find_best_dir(t_stacks *stacks, int *t, char c, int *dir)
 		check = lf_group_dir(stacks->b, stacks->size_b, t[0], &tmp[0]);
 		check2 = lf_group_dir(stacks->b, stacks->size_b, t[1], &tmp[1]);
 	}
-//	if (!check)
-//		tmp[0] = 999999999;
-//	if (!check2)
-//		tmp[1] = 999999999;
 	if (check || check2)
 	{
-		if ((check2 && !check) || (check && check2 &&
-			valeur_absolue(tmp[1]) < valeur_absolue(tmp[0])))
+		if ((check2 && !check) || (check && check2
+				&& valeur_absolue(tmp[1]) < valeur_absolue(tmp[0])))
 			*dir = tmp[1];
 		else
 			*dir = tmp[0];

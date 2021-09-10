@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:20:33 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/10 17:55:58 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/09/10 21:01:27 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	sort_final(t_stacks *stacks, int index)
 
 static BOOL	find_best_dir(t_stacks *stacks, int *t, char c, int *dir)
 {
-	int	tmp[2];
+	int		tmp[2];
 	BOOL	check;
 	BOOL	check2;
 
@@ -45,8 +45,8 @@ static BOOL	find_best_dir(t_stacks *stacks, int *t, char c, int *dir)
 	}
 	if (check || check2)
 	{
-		if ((check2 && !check) || (check && check2 &&
-			valeur_absolue(tmp[1]) < valeur_absolue(tmp[0])))
+		if ((check2 && !check) || (check && check2
+				&& valeur_absolue(tmp[1]) < valeur_absolue(tmp[0])))
 			*dir = tmp[1];
 		else
 			*dir = tmp[0];
@@ -54,7 +54,6 @@ static BOOL	find_best_dir(t_stacks *stacks, int *t, char c, int *dir)
 	}
 	return (FALSE);
 }
-
 
 static void	radix_sort_b(t_stacks *stacks, int expo)
 {
@@ -108,8 +107,6 @@ void	radix_sort_a(t_stacks *stacks, int expo)
 	else
 		sort_final(stacks, stacks->total_size);
 }
-
-#include <stdio.h>
 
 void	radix(t_stacks *stacks)
 {
