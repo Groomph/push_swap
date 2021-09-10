@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 14:25:29 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/08/27 18:08:36 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/08/30 15:28:59 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ typedef struct s_list
 
 typedef struct s_list2
 {
-	char			data;
+	int		nb;
+	int		index;
+	int		group;
 	struct s_list2	*prev;
 	struct s_list2	*next;
 }					t_list2;
@@ -96,9 +98,10 @@ t_list	*lst_duplicate(t_list *original);
 
 void	lst2_addfront(t_list2 **alst, t_list2 *new);
 t_list2	*lst2_getlast(t_list2 *lst);
-t_list2	*lst2_getsecondlast(t_list2 *lst);
+t_list2	*lst2_getsecondlast(t_list2 *lst, t_list2 *last);
 void	lst2_addback(t_list2 **alst, t_list2 *new, t_list2 *last);
 void	lst2_clear(t_list2 **lst, void (*del)(void*));
+t_list2	*lst2_duplicate(t_list2 *original);
 
 /*
  *******************  FILE DESCRIPTOR  *******************

@@ -6,39 +6,13 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 18:29:55 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/08/27 18:05:25 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/09/08 00:07:39 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	get_size_first_group(t_list *stack)
-{
-        int	group;
-        int	i;
-
-        group = stack->group;
-        i = 0;
-        while (stack && stack->group == group)
-        {
-                i++;
-                stack = stack->next;
-        }
-        return (i);
-}
-
-BOOL	group_ispresent(t_list *stack, int group)
-{
-        while (stack)
-        {
-                if (stack->group == group)
-                        return (TRUE);
-                stack = stack->next;
-        }
-        return (FALSE);
-}
-
-void	set_group(t_list *stack, int group)
+void	set_group(t_list2 *stack, int group)
 {
         while (stack)
         {
@@ -47,7 +21,7 @@ void	set_group(t_list *stack, int group)
         }
 }
 
-int	attrib_group(t_list *stack, int size_stack, int size_group)
+int	attrib_group(t_list2 *stack, int size_stack, int size_group)
 {
 	int	last_group;
 
@@ -64,7 +38,7 @@ int	attrib_group(t_list *stack, int size_stack, int size_group)
 	return (last_group);
 }
 
-static int	lf_group_back(t_list *stack, int size, int group, int i)
+static int	lf_group_back(t_list2 *stack, int size, int group, int i)
 {
 	int	i2;
 
@@ -78,7 +52,7 @@ static int	lf_group_back(t_list *stack, int size, int group, int i)
 	return (i2 - size);
 }
 
-BOOL	lf_group_dir(t_list *stack, int size, int group, int *dir)
+BOOL	lf_group_dir(t_list2 *stack, int size, int group, int *dir)
 {
 	int	i;
 	int	i2;

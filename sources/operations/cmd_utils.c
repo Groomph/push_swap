@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 17:09:16 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/08/27 18:00:37 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/08/30 14:56:10 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	add_command(t_stacks *stacks, char cmd)
 	tmp = malloc(sizeof(t_list2));
 	if (!tmp)
 		exit_program(stacks, 2);
-	tmp->data = cmd;
+	tmp->index = cmd;
 	tmp->prev = stacks->last_cmd;
 	tmp->next = NULL;
 	if (!stacks->cmd)

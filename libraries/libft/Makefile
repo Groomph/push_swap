@@ -6,7 +6,7 @@
 #    By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/15 14:25:42 by rsanchez          #+#    #+#              #
-#    Updated: 2021/08/27 18:12:02 by rsanchez         ###   ########.fr        #
+#    Updated: 2021/08/30 14:48:22 by rsanchez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ SOURCES	= init_zero.c valeur_absolue.c \
 	  $(LIST)/ft_lstsecondlast.c $(LIST)/lst_duplicate.c \
 	  $(LIST2)/lst2_addback.c $(LIST2)/lst2_addfront.c \
 	  $(LIST2)/lst2_clear.c $(LIST2)/lst2_getlast.c \
-	  $(LIST2)/lst2_getsecondlast.c \
+	  $(LIST2)/lst2_getsecondlast.c $(LIST2)/lst2_duplicate.c \
 	  ${FD}/get_next_line.c \
 	  $(DISPLAY)/buffer.c $(DISPLAY)/buffer_conversion.c
 

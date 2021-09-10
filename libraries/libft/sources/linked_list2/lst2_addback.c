@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 14:55:40 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/08/27 18:11:29 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/08/30 16:36:16 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	lst2_addback2(t_list2 **alst, t_list2 *new)
 		new->prev = NULL;
 	}
 	else if ((*alst)->next)
-		lst2_addback2(&(*alst)->next, new);
+		lst2_addback2(&((*alst)->next), new);
 	else
 	{
 		(*alst)->next = new;

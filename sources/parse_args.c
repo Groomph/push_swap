@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 15:00:17 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/08/26 00:54:05 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/08/30 17:16:09 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	check_doubles(t_stacks *stacks)
 {
-	t_list	*list;
-	t_list	*list2;
+	t_list2	*list;
+	t_list2	*list2;
 
 	list = stacks->a;
 	while (list)
@@ -63,20 +63,23 @@ static int	new_atoi(t_stacks *stacks, char *str, int *i)
 	return (nb * neg);
 }
 
+#include <stdio.h>
+
 static void	add_link(t_stacks *stacks, char *str, int *i)
 {
-	t_list	*tmp_list;
+	t_list2	*tmp_list;
 
 	if ((str[*i] == '+' || str[*i] == '-')
 		&& !(str[(*i) + 1] >= '0' && str[*(i) + 1] <= '9'))
 	{
 		exit_program(stacks, TRUE);
 	}
-	tmp_list = malloc(sizeof(t_list));
+	tmp_list = malloc(sizeof(t_list2));
 	if (!tmp_list)
 		exit_program(stacks, 2);
 	tmp_list->nb = new_atoi(stacks, str, i);
-	ft_lstadd_back(&(stacks->a), tmp_list);
+	lst2_addback(&(stacks->a), tmp_list, stacks->last_a);
+	stacks->last_a = tmp_list;
 	stacks->size_a++;
 	stacks->total_size++;
 }

@@ -6,7 +6,7 @@
 #    By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/19 16:05:34 by rsanchez          #+#    #+#              #
-#    Updated: 2021/08/26 19:04:31 by rsanchez         ###   ########.fr        #
+#    Updated: 2021/09/10 17:55:32 by rsanchez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = push_swap
 
 CC = clang
 
-#CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 FLAGSHARD = -Weverything
 
@@ -28,22 +28,38 @@ DIR_S = sources
 
 DIR_OPE = operations
 
-DIR_A1 = 5orless
+DIR_ALG = algos
 
-DIR_A2 = quick_sort
+DIR_A1 = $(DIR_ALG)/5orless
+
+DIR_A2 = $(DIR_ALG)/quick_sort
+
+DIR_A3 = $(DIR_ALG)/insert_opti
+
+DIR_A4 = $(DIR_ALG)/double_insert
+
+DIR_A5 = $(DIR_ALG)/radix
+
+DIR_PRE = $(DIR_ALG)/presort
 
 DIR_UTILS = algo_utils
+
 
 DIR_O = temporary
 
 SOURCES = main.c parse_args.c select_algo.c display.c \
 	  $(DIR_OPE)/cmd_utils.c $(DIR_OPE)/swap.c $(DIR_OPE)/push.c \
-	  $(DIR_OPE)/rotate.c $(DIR_OPE)/rev_rotate.c \
+	  $(DIR_OPE)/rotate.c $(DIR_OPE)/rev_rotate.c $(DIR_OPE)/optimize.c \
 	  $(DIR_UTILS)/checkifsort.c $(DIR_UTILS)/group.c \
 	  $(DIR_UTILS)/is_sorted.c $(DIR_UTILS)/search_move.c \
-	  $(DIR_A1)/5orless.c \
-	  $(DIR_A2)/quick_sort.c \
-	  $(DIR_A2)/sort_b.c
+	  $(DIR_A1)/5orless.c $(DIR_A1)/5orless_b.c $(DIR_A1)/three_123.c \
+	  $(DIR_A1)/topthree_123.c $(DIR_A1)/topthree_b_123.c \
+	  $(DIR_A2)/quick_sort.c $(DIR_A2)/sort_b.c $(DIR_A2)/utils.c \
+	  $(DIR_A3)/insert_opti.c $(DIR_A3)/insert_opti_presort.c \
+	  $(DIR_A3)/utils.c \
+	  $(DIR_A4)/double_insert.c $(DIR_A4)/utils.c \
+	  $(DIR_A5)/radix.c $(DIR_A5)/utils.c \
+	  $(DIR_PRE)/presort.c
 
 SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
 
@@ -61,8 +77,13 @@ $(DIR_O)/%.o: $(DIR_S)/%.c
 	mkdir -p $(DIR_O)
 	mkdir -p $(DIR_O)/$(DIR_OPE)
 	mkdir -p $(DIR_O)/$(DIR_UTILS)
+	mkdir -p $(DIR_O)/$(DIR_ALG)
 	mkdir -p $(DIR_O)/$(DIR_A1)
 	mkdir -p $(DIR_O)/$(DIR_A2)
+	mkdir -p $(DIR_O)/$(DIR_A3)
+	mkdir -p $(DIR_O)/$(DIR_A4)
+	mkdir -p $(DIR_O)/$(DIR_A5)
+	mkdir -p $(DIR_O)/$(DIR_PRE)
 	$(CC) $(CFLAGS) -I $(HEADER) -o $@ -c $<
 
 norme:
