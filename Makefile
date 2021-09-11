@@ -6,13 +6,15 @@
 #    By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/19 16:05:34 by rsanchez          #+#    #+#              #
-#    Updated: 2021/09/11 02:54:38 by rsanchez         ###   ########.fr        #
+#    Updated: 2021/09/11 03:14:43 by rsanchez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
 NAMEB = checker
+
+NAMEG = generator
 
 CC = clang
 
@@ -26,11 +28,11 @@ LIBFT	= -L $(LIB)/libft/ -lft
 
 HEADER = includes
 
-HEADERB = includes_bonus
-
 DIR_S = sources
 
 DIR_SB = bonus
+
+DIR_SG = nb_generator
 
 DIR_OPE = operations
 
@@ -54,6 +56,8 @@ DIR_O = temporary
 
 DIR_OB = temporary_bonus
 
+DIR_OG = temporary_generator
+
 SOURCES = main.c parse_args.c select_algo.c display.c \
 	  $(DIR_OPE)/cmd_utils.c $(DIR_OPE)/swap.c $(DIR_OPE)/push.c \
 	  $(DIR_OPE)/rotate.c $(DIR_OPE)/rev_rotate.c $(DIR_OPE)/optimize.c \
@@ -70,7 +74,9 @@ SOURCES = main.c parse_args.c select_algo.c display.c \
 
 SOURCESB = main.c parse_args.c checkifsort.c display.c \
 	  $(DIR_OPE)/cmd_utils.c $(DIR_OPE)/swap.c $(DIR_OPE)/push.c \
-	  $(DIR_OPE)/rotate.c $(DIR_OPE)/rev_rotate.c \
+	  $(DIR_OPE)/rotate.c $(DIR_OPE)/rev_rotate.c
+
+SOURCESG = main.c
 
 SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
 
@@ -79,6 +85,10 @@ OBJS = $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
 SRCSB = $(addprefix $(DIR_SB)/,$(SOURCESB))
 
 OBJSB = $(addprefix $(DIR_OB)/,$(SOURCESB:.c=.o))
+
+SRCSG = $(addprefix $(DIR_SG)/,$(SOURCESG))
+
+OBJSG = $(addprefix $(DIR_OG)/,$(SOURCESG:.c=.o))
 
 all: $(NAME)
 
@@ -91,6 +101,10 @@ $(NAME): $(OBJS)
 $(NAMEB): $(OBJSB)
 	make -C $(LIB)/libft
 	$(CC) $(CFLAGS) -o $(NAMEB) $(OBJSB) $(LIBFT)
+
+$(NAMEG): $(OBJSG)
+	make -C $(LIB)/libft
+	$(CC) $(CFLAGS) -o $(NAMEG) $(OBJSG) $(LIBFT)
 
 $(DIR_O)/%.o: $(DIR_S)/%.c
 	mkdir -p $(DIR_O)
@@ -109,6 +123,11 @@ $(DIR_OB)/%.o: $(DIR_SB)/%.c
 	mkdir -p $(DIR_OB)
 	mkdir -p $(DIR_OB)/$(DIR_OPE)
 	$(CC) $(CFLAGS) -I $(HEADER) -o $@ -c $<
+
+$(DIR_OG)/%.o: $(DIR_SG)/%.c
+	mkdir -p $(DIR_OG)
+	$(CC) $(CFLAGS) -I $(HEADER) -o $@ -c $<
+
 norme:
 	@echo
 	norminette $(LIB)/
@@ -118,15 +137,19 @@ norme:
 	norminette $(DIR_S)/
 	@echo
 	norminette $(DIR_SB)/
+	@echo
+	norminette $(DIR_SG)/
 
 clean:
 	rm -rf $(DIR_O)
 	rm -rf $(DIR_OB)
+	rm -rf $(DIR_OG)
 	make fclean -C $(LIB)/libft
 
 fclean: clean
 	rm -f $(NAME)
 	rm -f $(NAMEB)
+	rm -f $(NAMEG)
 
 re: fclean all
 
