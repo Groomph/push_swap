@@ -6,7 +6,7 @@
 #    By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/19 16:05:34 by rsanchez          #+#    #+#              #
-#    Updated: 2021/09/11 01:53:13 by rsanchez         ###   ########.fr        #
+#    Updated: 2021/09/11 02:54:38 by rsanchez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -126,6 +126,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f $(NAMEB)
 
 re: fclean all
 
