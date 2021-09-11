@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 09:51:19 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/10 20:57:26 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/09/11 00:07:06 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	quicksort_rec(t_stacks *stacks)
 		group = 1;
 	}
 	else if (stacks->extra == 1)
-		presort_x_a(stacks, stacks->total_size / 3, FALSE);
+		presort_x_a(stacks, stacks->total_size / 3, TRUE);
 	else if (stacks->extra == 2)
 		presort_x_a(stacks, stacks->total_size / 4, TRUE);
 	else if (stacks->extra == 3)

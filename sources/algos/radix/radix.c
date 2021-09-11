@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 13:20:33 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/10 21:01:27 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/09/10 23:54:48 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	radix_sort_a(t_stacks *stacks, int expo)
 	if (expo > 10)
 		radix_sort_b(stacks, expo / 10);
 	else
-		sort_final(stacks, stacks->total_size);
+		sort_final(stacks, stacks->total_size - 1);
 }
 
 void	radix(t_stacks *stacks)
@@ -128,7 +128,10 @@ void	radix(t_stacks *stacks)
 	{
 		while (stacks->size_a > 0)
 			push_b(stacks);
-		radix_sort_b(stacks, expo);
+		if (stacks->total_size > 10)
+			radix_sort_b(stacks, expo);
+		else
+			sort_final(stacks, stacks->total_size - 1);
 	}
 	else
 		radix_sort_a(stacks, expo);

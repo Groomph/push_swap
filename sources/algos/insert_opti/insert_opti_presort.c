@@ -6,13 +6,11 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 14:27:12 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/10 20:54:02 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/09/10 22:35:51 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-#include <unistd.h>
 
 static void	find_place(int index, t_list2 *list, int size, int *move)
 {

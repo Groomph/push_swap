@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 15:08:04 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/10 20:51:23 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/09/10 23:51:59 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ void	double_insert(t_stacks *stacks)
 		i = 10;
 	else
 		i = stacks->total_size / 120;
-	while (stacks->total_size / (i * i * i) < 15 && i > 0)
+	while (i > 1 && stacks->total_size / (i * i * i) < 15)
 		i--;
 	stacks->extra = i;
 	if (i == 1)

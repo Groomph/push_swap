@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 12:52:10 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/10 20:54:43 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/09/11 00:16:13 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ void	presort_x_a(t_stacks *stacks, int size_group, BOOL reset_group)
 	attrib_group(stacks->a, stacks->size_a, size_group);
 	check[0] = 1;
 	while (check[0] || check[1])
-	{
 		presort_2(stacks, check);
-	}
 	if (reset_group)
 		set_group(stacks->a, 2);
 }

@@ -6,11 +6,13 @@
 #    By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/19 16:05:34 by rsanchez          #+#    #+#              #
-#    Updated: 2021/09/10 17:55:32 by rsanchez         ###   ########.fr        #
+#    Updated: 2021/09/11 01:53:13 by rsanchez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
+
+NAMEB = checker
 
 CC = clang
 
@@ -24,7 +26,11 @@ LIBFT	= -L $(LIB)/libft/ -lft
 
 HEADER = includes
 
+HEADERB = includes_bonus
+
 DIR_S = sources
+
+DIR_SB = bonus
 
 DIR_OPE = operations
 
@@ -44,8 +50,9 @@ DIR_PRE = $(DIR_ALG)/presort
 
 DIR_UTILS = algo_utils
 
-
 DIR_O = temporary
+
+DIR_OB = temporary_bonus
 
 SOURCES = main.c parse_args.c select_algo.c display.c \
 	  $(DIR_OPE)/cmd_utils.c $(DIR_OPE)/swap.c $(DIR_OPE)/push.c \
@@ -61,17 +68,29 @@ SOURCES = main.c parse_args.c select_algo.c display.c \
 	  $(DIR_A5)/radix.c $(DIR_A5)/utils.c \
 	  $(DIR_PRE)/presort.c
 
+SOURCESB = main.c parse_args.c checkifsort.c display.c \
+	  $(DIR_OPE)/cmd_utils.c $(DIR_OPE)/swap.c $(DIR_OPE)/push.c \
+	  $(DIR_OPE)/rotate.c $(DIR_OPE)/rev_rotate.c \
+
 SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
 
 OBJS = $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
 
+SRCSB = $(addprefix $(DIR_SB)/,$(SOURCESB))
+
+OBJSB = $(addprefix $(DIR_OB)/,$(SOURCESB:.c=.o))
+
 all: $(NAME)
 
-bonus: $(NAME)
+bonus: $(NAMEB)
 
 $(NAME): $(OBJS)
 	make -C $(LIB)/libft
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
+
+$(NAMEB): $(OBJSB)
+	make -C $(LIB)/libft
+	$(CC) $(CFLAGS) -o $(NAMEB) $(OBJSB) $(LIBFT)
 
 $(DIR_O)/%.o: $(DIR_S)/%.c
 	mkdir -p $(DIR_O)
@@ -86,15 +105,23 @@ $(DIR_O)/%.o: $(DIR_S)/%.c
 	mkdir -p $(DIR_O)/$(DIR_PRE)
 	$(CC) $(CFLAGS) -I $(HEADER) -o $@ -c $<
 
+$(DIR_OB)/%.o: $(DIR_SB)/%.c
+	mkdir -p $(DIR_OB)
+	mkdir -p $(DIR_OB)/$(DIR_OPE)
+	$(CC) $(CFLAGS) -I $(HEADER) -o $@ -c $<
 norme:
+	@echo
+	norminette $(LIB)/
 	@echo
 	norminette $(HEADER)/
 	@echo
 	norminette $(DIR_S)/
+	@echo
+	norminette $(DIR_SB)/
 
 clean:
-	rm -f $(OBJS)
 	rm -rf $(DIR_O)
+	rm -rf $(DIR_OB)
 	make fclean -C $(LIB)/libft
 
 fclean: clean
@@ -102,4 +129,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY:		all clean fclean re bonus
+.PHONY:		all clean fclean re bonus norme

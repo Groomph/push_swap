@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checkifsort.c                                      :+:      :+:    :+:   */
+/*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/29 16:52:52 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/11 00:22:11 by rsanchez         ###   ########.fr       */
+/*   Created: 2021/08/24 17:09:16 by rsanchez          #+#    #+#             */
+/*   Updated: 2021/09/11 02:24:22 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-BOOL	checkifsort(t_stacks *stacks)
+void	add_command(t_stacks *stacks, char cmd)
 {
-	t_list2	*tmp_list;
+	t_list2	*tmp;
 
-	tmp_list = stacks->a;
-	if (stacks->size_b > 0 || !tmp_list)
-		return (FALSE);
-	while (tmp_list->next)
-	{
-		if (tmp_list->nb > tmp_list->next->nb)
-			return (FALSE);
-		tmp_list = tmp_list->next;
-	}
-	return (TRUE);
+	tmp = malloc(sizeof(t_list2));
+	if (!tmp)
+		exit_program(stacks, 2);
+	tmp->index = cmd;
+	tmp->prev = stacks->last_cmd;
+	tmp->next = NULL;
+	if (!(stacks->cmd))
+		stacks->cmd = tmp;
+	else
+		stacks->last_cmd->next = tmp;
+	stacks->last_cmd = tmp;
+	stacks->count++;
 }

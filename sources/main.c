@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 16:17:50 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/10 18:30:02 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/09/11 00:27:52 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	main(int ac, char **av)
 	init_zero(&stacks, sizeof(stacks));
 	build_list(&stacks, ac - 1, &(av[1]));
 	check_doubles(&stacks);
-	if (!checkifsort(&stacks))
+	if (stacks.total_size > 1 && stacks.total_size <= 5000
+		&& !checkifsort(&stacks))
 		select_algo(&stacks);
 	exit_program(&stacks, FALSE);
 	return (1);
