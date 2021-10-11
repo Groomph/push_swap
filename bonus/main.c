@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 16:17:50 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/11 02:51:50 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/10/11 18:00:07 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,15 @@ int	main(int ac, char **av)
 	init_zero(&stacks, sizeof(stacks));
 	build_list(&stacks, ac - 1, &(av[1]));
 	check_doubles(&stacks);
-	build_command_list(&stacks);
-	apply_commands(&stacks);
-	if (checkifsort(&stacks))
-		write(1, "OK\n", 3);
-	else
-		write(2, "KO\n", 3);
+	if (stacks.total_size > 1 && stacks.total_size <= 5000)
+	{
+		build_command_list(&stacks);
+		apply_commands(&stacks);
+		if (checkifsort(&stacks))
+			write(1, "OK\n", 3);
+		else
+			write(2, "KO\n", 3);
+	}
 	exit_program(&stacks, FALSE);
 	return (1);
 }

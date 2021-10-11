@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 15:00:17 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/11 00:46:18 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/10/11 17:33:19 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,30 +37,30 @@ void	check_doubles(t_stacks *stacks)
 
 static int	new_atoi(t_stacks *stacks, char *str, int *i)
 {
-	unsigned int	nb;
-	int				neg;
+	unsigned long int	nb;
+	int					n;
 
 	nb = 0;
-	neg = 1;
+	n = 1;
 	if (str[(*i)] == '-' && ++(*i))
-		neg *= -1;
+		n = -1;
 	else if (str[(*i)] == '+')
 		(*i)++;
 	while (str[(*i)] >= '0' && str[(*i)] <= '9')
 	{
-		if (nb >= 1000000000
-			|| (nb >= 214748364
-				&& (str[(*i)] > '8' || (neg == 1 && str[(*i)] > '7'))))
+		if ((nb > 2147483648 && n == -1) || (nb > 2147483647 && n == 1))
 			exit_program(stacks, TRUE);
 		nb *= 10;
 		nb += str[(*i)] - '0';
 		(*i)++;
 	}
+	if ((nb > 2147483648 && n == -1) || (nb > 2147483647 && n == 1))
+		exit_program(stacks, TRUE);
 	if (str[*i] && !is_whitespace(str[*i]))
 		exit_program(stacks, TRUE);
 	while (is_whitespace(str[*i]))
 		(*i)++;
-	return (nb * neg);
+	return (nb * n);
 }
 
 static void	add_link(t_stacks *stacks, char *str, int *i)

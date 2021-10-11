@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 01:22:24 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/11 02:41:49 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/10/11 18:05:14 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	rotate_a(t_stacks *stacks)
 		apply_rotate(&(stacks->a), stacks->last_a);
 		stacks->last_a = stacks->last_a->next;
 	}
-	else
-		write(1, "ra: not supposed to happen\n", 27);
 }
 
 void	rotate_b(t_stacks *stacks)
@@ -41,8 +39,6 @@ void	rotate_b(t_stacks *stacks)
 		apply_rotate(&(stacks->b), stacks->last_b);
 		stacks->last_b = stacks->last_b->next;
 	}
-	else
-		write(1, "rb: not supposed to happen\n", 27);
 }
 
 void	rotate_rr(t_stacks *stacks)
@@ -61,6 +57,4 @@ void	rotate_rr(t_stacks *stacks)
 		stacks->last_b = stacks->last_b->next;
 		check += 2;
 	}
-	if (check != 3)
-		write(1, "rr: not supposed to happen\n", 27);
 }

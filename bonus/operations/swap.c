@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 01:21:50 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/11 02:41:14 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/10/11 18:05:36 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ void	swap_a(t_stacks *stacks)
 			stacks->last_a = stacks->a;
 		apply_swap(&(stacks->a));
 	}
-	else
-		write(1, "sa: not supposed to happen\n", 27);
 }
 
 void	swap_b(t_stacks *stacks)
@@ -47,8 +45,6 @@ void	swap_b(t_stacks *stacks)
 			stacks->last_b = stacks->b;
 		apply_swap(&(stacks->b));
 	}
-	else
-		write(1, "sb: not supposed to happen\n", 27);
 }
 
 void	swap_ss(t_stacks *stacks)
@@ -69,6 +65,4 @@ void	swap_ss(t_stacks *stacks)
 		apply_swap(&(stacks->b));
 		check += 2;
 	}
-	if (check != 3)
-		write(1, "ss: not supposed to happen\n", 27);
 }

@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 01:22:09 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/11 02:41:25 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/10/11 18:03:29 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ void	push_a(t_stacks *stacks)
 		if (!stacks->last_a)
 			stacks->last_a = stacks->a;
 	}
-	else
-		write(1, "pa: not supposed to happen\n", 27);
 }
 
 void	push_b(t_stacks *stacks)
@@ -56,6 +54,4 @@ void	push_b(t_stacks *stacks)
 		if (!stacks->last_b)
 			stacks->last_b = stacks->b;
 	}
-	else
-		write(1, "pb: not supposed to happen\n", 27);
 }
