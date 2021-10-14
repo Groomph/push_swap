@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 15:08:04 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/10 23:51:59 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/10/14 16:32:10 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,8 @@ void	sort_a(t_stacks *stacks, int size_group, BOOL first)
 {
 	int	dir;
 	int	t[2];
-	int	last;
 
-	last = set_target(stacks, size_group, t, 'a');
+	set_target(stacks, size_group, t, 'a');
 	while (stacks->size_a > 0)
 	{
 		if (find_best_dir(stacks, t, 'a', &dir))

@@ -6,7 +6,7 @@
 #    By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/15 14:25:42 by rsanchez          #+#    #+#              #
-#    Updated: 2021/08/30 14:48:22 by rsanchez         ###   ########.fr        #
+#    Updated: 2021/10/14 16:02:11 by rsanchez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,14 +67,14 @@ $(NAME):	${OBJS}
 			ar rc ${NAME} ${OBJS}
 
 $(DIR_O)/%.o: $(DIR_S)/%.c
-	mkdir -p $(DIR_O)
-	mkdir -p $(DIR_O)/$(NB_STR)
-	mkdir -p $(DIR_O)/$(DISPLAY)
-	mkdir -p $(DIR_O)/$(FD)
-	mkdir -p $(DIR_O)/$(IS_FCT)
-	mkdir -p $(DIR_O)/$(STRING)
-	mkdir -p $(DIR_O)/$(LIST)
-	mkdir -p $(DIR_O)/$(LIST2)
+	@mkdir -p $(DIR_O)
+	@mkdir -p $(DIR_O)/$(NB_STR)
+	@mkdir -p $(DIR_O)/$(DISPLAY)
+	@mkdir -p $(DIR_O)/$(FD)
+	@mkdir -p $(DIR_O)/$(IS_FCT)
+	@mkdir -p $(DIR_O)/$(STRING)
+	@mkdir -p $(DIR_O)/$(LIST)
+	@mkdir -p $(DIR_O)/$(LIST2)
 	$(CC) $(CFLAGS) -I $(HEADER) -o $@ -c $<
 
 all:		${NAME}

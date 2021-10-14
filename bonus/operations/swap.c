@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 01:21:50 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/10/11 18:05:36 by romain           ###   ########.fr       */
+/*   Updated: 2021/10/14 16:26:48 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,7 @@ void	swap_b(t_stacks *stacks)
 
 void	swap_ss(t_stacks *stacks)
 {
-	int	check;
-
-	check = 0;
-	if (stacks->size_a > 1 && ++check)
+	if (stacks->size_a > 1)
 	{
 		if (stacks->size_a == 2)
 			stacks->last_a = stacks->a;
@@ -63,6 +60,5 @@ void	swap_ss(t_stacks *stacks)
 		if (stacks->size_b == 2)
 			stacks->last_b = stacks->b;
 		apply_swap(&(stacks->b));
-		check += 2;
 	}
 }

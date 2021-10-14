@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 16:17:50 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/10/11 18:00:07 by romain           ###   ########.fr       */
+/*   Updated: 2021/10/14 19:25:28 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,23 +71,23 @@ static BOOL	get_command(t_stacks *stacks, char *buffer)
 
 void	build_command_list(t_stacks *stacks)
 {
+	char	*line;
 	char	*buffer;
-	BOOL	check;
+	BOOL	eof;
 
-	check = TRUE;
-	while (check >= 0)
+	buffer = NULL;
+	eof = FALSE;
+	while (!eof)
 	{
-		check = get_next_line(0, &buffer);
-		if (check == 0 && !(buffer[0]))
-			break ;
-		if (check == 0 || !get_command(stacks, buffer))
+		get_next_line(0, &buffer, &line, &eof);
+		if (!eof && !get_command(stacks, line))
 		{
 			free(buffer);
+			free(line);
 			exit_program(stacks, TRUE);
 		}
-		free(buffer);
+		free(line);
 	}
-	free(buffer);
 }
 
 int	main(int ac, char **av)

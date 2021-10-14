@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 15:00:17 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/10/11 17:28:32 by romain           ###   ########.fr       */
+/*   Updated: 2021/10/14 16:06:42 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ static void	add_link(t_stacks *stacks, char *str, int *i)
 	tmp_list = malloc(sizeof(t_list2));
 	if (!tmp_list)
 		exit_program(stacks, 2);
-	tmp_list->nb = new_atoi(stacks, str, i);
 	lst2_addback(&(stacks->a), tmp_list, stacks->last_a);
+	tmp_list->nb = new_atoi(stacks, str, i);
 	stacks->last_a = tmp_list;
 	stacks->size_a++;
 	stacks->total_size++;

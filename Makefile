@@ -6,7 +6,7 @@
 #    By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/19 16:05:34 by rsanchez          #+#    #+#              #
-#    Updated: 2021/09/11 03:14:43 by rsanchez         ###   ########.fr        #
+#    Updated: 2021/10/14 16:31:45 by rsanchez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ NAMEG = generator
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror #--analyze
 
 FLAGSHARD = -Weverything
 
@@ -107,25 +107,25 @@ $(NAMEG): $(OBJSG)
 	$(CC) $(CFLAGS) -o $(NAMEG) $(OBJSG) $(LIBFT)
 
 $(DIR_O)/%.o: $(DIR_S)/%.c
-	mkdir -p $(DIR_O)
-	mkdir -p $(DIR_O)/$(DIR_OPE)
-	mkdir -p $(DIR_O)/$(DIR_UTILS)
-	mkdir -p $(DIR_O)/$(DIR_ALG)
-	mkdir -p $(DIR_O)/$(DIR_A1)
-	mkdir -p $(DIR_O)/$(DIR_A2)
-	mkdir -p $(DIR_O)/$(DIR_A3)
-	mkdir -p $(DIR_O)/$(DIR_A4)
-	mkdir -p $(DIR_O)/$(DIR_A5)
-	mkdir -p $(DIR_O)/$(DIR_PRE)
+	@mkdir -p $(DIR_O)
+	@mkdir -p $(DIR_O)/$(DIR_OPE)
+	@mkdir -p $(DIR_O)/$(DIR_UTILS)
+	@mkdir -p $(DIR_O)/$(DIR_ALG)
+	@mkdir -p $(DIR_O)/$(DIR_A1)
+	@mkdir -p $(DIR_O)/$(DIR_A2)
+	@mkdir -p $(DIR_O)/$(DIR_A3)
+	@mkdir -p $(DIR_O)/$(DIR_A4)
+	@mkdir -p $(DIR_O)/$(DIR_A5)
+	@mkdir -p $(DIR_O)/$(DIR_PRE)
 	$(CC) $(CFLAGS) -I $(HEADER) -o $@ -c $<
 
 $(DIR_OB)/%.o: $(DIR_SB)/%.c
-	mkdir -p $(DIR_OB)
-	mkdir -p $(DIR_OB)/$(DIR_OPE)
+	@mkdir -p $(DIR_OB)
+	@mkdir -p $(DIR_OB)/$(DIR_OPE)
 	$(CC) $(CFLAGS) -I $(HEADER) -o $@ -c $<
 
 $(DIR_OG)/%.o: $(DIR_SG)/%.c
-	mkdir -p $(DIR_OG)
+	@mkdir -p $(DIR_OG)
 	$(CC) $(CFLAGS) -I $(HEADER) -o $@ -c $<
 
 norme:

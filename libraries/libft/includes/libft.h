@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 14:25:29 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/10 21:55:16 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/10/14 19:29:58 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ t_list2				*lst2_duplicate(t_list2 *original);
  *******************  FILE DESCRIPTOR  *******************
 */
 
-int					get_next_line(int fd, char **line);
+int					get_next_line(int fd, char **buffer,
+						char **line, BOOL *eof);
 
 #endif

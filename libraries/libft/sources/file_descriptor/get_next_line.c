@@ -6,36 +6,36 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 14:48:15 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/07/19 16:23:43 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/09/18 16:15:55 by rsanchez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <unistd.h>
 
-static size_t	isnl(char *str)
+static int	isnl(char *str)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (str && str[i])
 	{
 		if (str[i] == '\n')
-			return (i + 1);
+			return (i);
 		i++;
 	}
-	return (0);
+	return (-1);
 }
 
-static int	extractline(char **buf, char **line, size_t nl, size_t len)
+static int	extractline(char **buffer, char **line, size_t nl, size_t len)
 {
 	if (len == 0)
 	{
-		if (*buf)
+		if (*buffer)
 		{
-			*line = *buf;
-			*buf = NULL;
-			return (0);
+			*line = *buffer;
+			*buffer = NULL;
+			return (string_len(*line));
 		}
 		*line = malloc(1);
 		if (!(*line))
@@ -43,36 +43,39 @@ static int	extractline(char **buf, char **line, size_t nl, size_t len)
 		**line = '\0';
 		return (0);
 	}
-	*line = substr_free(*buf, 0, nl, DONTFREE);
-	*buf = substr_free(*buf, nl + 1, 100, DOFREE);
-	if (!*line || !*buf)
+	*line = substr_free(*buffer, 0, nl, DONTFREE);
+	if (!*line)
 		return (-1);
-	return (1);
+	*buffer = substr_free(*buffer, nl + 1, 4096, DOFREE);
+	if (!*buffer)
+		return (-1);
+	return (nl);
 }
 
-int	get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **buffer, char **line, BOOL *eof)
 {
-	static char	*permbuf;
-	char		tmpbuf[101];
+	char		tmpbuf[4097];
 	size_t		len;
-	size_t		nl;
+	int			nl;
 
-	if (fd < 0 || read(fd, 0, 0) < 0 || !line)
+	if (fd < 0 || read(fd, NULL, 0) < 0 || !line)
 		return (-1);
 	len = 1;
-	nl = isnl(permbuf);
-	while (nl == 0 && len)
+	nl = isnl(*buffer);
+	while (nl == -1 && len)
 	{
-		len = read(fd, tmpbuf, 100);
-		if (len)
+		len = read(fd, tmpbuf, 4096);
+		if (len > 0)
 		{
 			tmpbuf[len] = '\0';
-			permbuf = strjoin_free(permbuf, tmpbuf,
+			*buffer = strjoin_free(*buffer, tmpbuf,
 					DOFREE, DONTFREE);
-			if (!permbuf)
+			if (!(*buffer))
 				return (-1);
-			nl = isnl(permbuf);
+			nl = isnl(*buffer);
 		}
+		else
+			*eof = TRUE;
 	}
-	return (extractline(&permbuf, line, nl - 1, len));
+	return (extractline(buffer, line, nl, len));
 }

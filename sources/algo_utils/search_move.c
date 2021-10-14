@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 16:52:52 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/09/10 20:33:29 by rsanchez         ###   ########.fr       */
+/*   Updated: 2021/10/14 16:08:14 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,9 @@ int	lf_smallest_index_ingroup(t_list2 *tmp, int group, int *dir, int size)
 BOOL	lf_index_dir(t_list2 *stack, int size, int index, int *dir)
 {
 	int	i;
-	int	check;
 
 	*dir = 0;
 	i = 0;
-	check = 0;
 	while (stack)
 	{
 		if (index == stack->index)

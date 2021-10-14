@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 01:22:24 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/10/11 18:04:59 by romain           ###   ########.fr       */
+/*   Updated: 2021/10/14 16:27:34 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,9 @@ void	rev_rotate_b(t_stacks *stacks)
 
 void	rev_rotate_rrr(t_stacks *stacks)
 {
-	int		check;
 	t_list2	*tmp;
 
-	check = 0;
-	if (stacks->size_a > 1 && ++check)
+	if (stacks->size_a > 1)
 	{
 		tmp = stacks->last_a->prev;
 		apply_rev_rotate(&(stacks->a), stacks->last_a);
@@ -60,7 +58,6 @@ void	rev_rotate_rrr(t_stacks *stacks)
 	{
 		tmp = stacks->last_b->prev;
 		apply_rev_rotate(&(stacks->b), stacks->last_b);
-		check += 2;
 		stacks->last_b = tmp;
 	}
 }

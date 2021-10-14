@@ -6,7 +6,7 @@
 /*   By: rsanchez <rsanchez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 01:22:24 by rsanchez          #+#    #+#             */
-/*   Updated: 2021/10/11 18:05:14 by romain           ###   ########.fr       */
+/*   Updated: 2021/10/14 16:27:07 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,7 @@ void	rotate_b(t_stacks *stacks)
 
 void	rotate_rr(t_stacks *stacks)
 {
-	int	check;
-
-	check = 0;
-	if (stacks->size_a > 1 && ++check)
+	if (stacks->size_a > 1)
 	{
 		apply_rotate(&(stacks->a), stacks->last_a);
 		stacks->last_a = stacks->last_a->next;
@@ -55,6 +52,5 @@ void	rotate_rr(t_stacks *stacks)
 	{
 		apply_rotate(&(stacks->b), stacks->last_b);
 		stacks->last_b = stacks->last_b->next;
-		check += 2;
 	}
 }
